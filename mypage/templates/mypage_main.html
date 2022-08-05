@@ -75,9 +75,11 @@
 
               {% if user.is_active %}
 
+
               {% if user.profile_image %}
               <img src = "{{ user.profile_image.url }}" alt = "유저의 이미지 부분">
               {% endif %}
+
 
 
         <div class = "user_info">
@@ -91,6 +93,10 @@
         <div class = "out">
         <button class = "log_out"><a href = "{% url 'logout' %}" style = "text-decoration:none;color:white;">로그아웃</a></button>
         </div>
+        {% endif %}
+
+
+    </div>
 
 
         {% endif %}
