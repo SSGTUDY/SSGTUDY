@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>닉네임 수정</title>
+    <script>
+        function close(){
+            window.close();
+        }
+    </script>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ user_change_form }}
+        <input type = "submit" value = "제출" onclick = "close()">
+    </form>
+
+</body>
+</html>
