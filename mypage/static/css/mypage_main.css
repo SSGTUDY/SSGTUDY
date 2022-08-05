@@ -52,6 +52,7 @@
     border-bottom: 1px solid #D1D1D1;
     filter: drop-shadow(0px 0.5px 0.5px rgba(0, 0, 0, 0.25));
 }
+
 .user_profile{
     display:flex;
     width:100%;
@@ -60,8 +61,19 @@
     align-items:center;
 }
 .user_profile div{
-    padding:4%;
     font-size:1vw;
+    margin-top:0.5vh;
+}
+.message_button{
+    background:#51a998;
+    font-size:1vw;
+    border:white;
+}
+.message_button:hover{
+    background:green;
+}
+.hidden{
+    display:none;
 }
 .mypage_move{
     margin-top:3vh;
@@ -110,7 +122,10 @@
     display:flex;
     justify-content:space-around;
     align-items:center;
-    width:60%;
+
+    width:50%;
+    font-size:1vw;
+
 }
 .content .out{
 }

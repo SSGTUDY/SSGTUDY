@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_summernote',
-
+    'about.apps.AboutConfig',
     'home.apps.HomeConfig',
     'match.apps.MatchConfig',
     'mypage.apps.MypageConfig',
@@ -118,11 +118,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SESSION_COOKIE_AGE = 1200
+SESSION_SAVE_EVERY_REQUEST = True
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-KR'
 
 TIME_ZONE = 'Asia/Seoul'
 
@@ -138,6 +141,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'home', 'static'),
     os.path.join(BASE_DIR, 'match', 'static'),
     os.path.join(BASE_DIR, 'mypage', 'static'),
+    os.path.join(BASE_DIR, 'about', 'static'),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
