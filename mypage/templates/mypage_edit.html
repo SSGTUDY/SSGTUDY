@@ -5,6 +5,7 @@
     {% block css %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href = "{% static 'css/mypage_main.css' %}">
+
     <title>개인정보 수정하기</title>
     {% endblock css %}
 
@@ -88,6 +89,7 @@
         <div class = "user_info">
             <label><b>닉네임</b></label>
             <div>{{ user.nickname }}</div>
+
         </div>
         <div class = "user_info">
             <label><b>아이디</b></label>
@@ -111,14 +113,24 @@
 
              <button style="color:white;background:#51a998;font-size:1vw;border:white;padding:0;border-radius:10%;">
                 <a href = "{% url 'change_img' %}" target="_blank" class = "edit_button">프로필 이미지 첨부/수정</a></button>
+
         </div>
+        <div class = "user_info">
+            <label><b>아이디</b></label>
+            <div>{{ user.username }}</div>
 
 
+             <button style="color:white;background:#51a998;font-size:1vw;border:white;padding:0;border-radius:10%;">
+                <a href = "{% url 'change_img' %}" target="_blank" class = "edit_button">프로필 이미지 첨부/수정</a></button>
+        </div>
         {% endif %}
     </div>
 
+
 </div>
+
 <script src = "{% static 'js/mypage.js' %}"></script>
+
 {% endblock %}
 </body>
 </html>
