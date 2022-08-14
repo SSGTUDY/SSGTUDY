@@ -1,6 +1,4 @@
-body{
-    background-color:#f5f5f5;
-}
+
 
 .top_content{
     display:flex;
@@ -23,7 +21,10 @@ body{
     width:60%;
     border:1px solid #51a998;
     color:black;
+    overflow:auto;
+    height:auto;
     font-size:1.2vw;
+    overflow:auto;
 }
 
 .user_image{
@@ -39,6 +40,7 @@ body{
     font-size:1.2vw;
     border:1px solid #51a998;
     justify-content:center;
+
 }
 .main_content{
     width:45%;
@@ -131,6 +133,7 @@ body{
     margin-left:1vw;
     font-weight:600;
     display:flex;
+    flex-wrap:wrap;
     width:80%;
     color:#51a998;
     font-size:1.05vw;
@@ -156,7 +159,9 @@ body{
     font-size:0.8vw;
     accent-color:#51a998;
     margin-top:5vh;
+    width:25vw;
 }
+
 
 
 .comment_modify{
@@ -181,7 +186,7 @@ body{
 .comment_container{
     display:flex;
     flex-direction:column;
-    border:1px solid #d1d1d1;
+    background:#f2f2f2;
     width:50%;
     height:auto;
     margin:0px auto;
@@ -193,6 +198,7 @@ body{
 
 }
 .comment_detail{
-
-
+    width:85%;
+    background:white;
+    border:1px solid #d1d1d1;
 }

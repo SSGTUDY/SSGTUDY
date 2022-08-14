@@ -16,7 +16,7 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-
+from django.http import HttpResponse
 
 
 
@@ -33,7 +33,7 @@ def study_register(request, recruit = None):
             recruit.recruit_writer = request.user
             recruit.recruit_date = timezone.now()
             recruit.save()
-            return redirect('main')
+            return HttpResponse("<script> window.close();</script>");
     else:
         form = RecruitForm(instance = recruit)
         return render(request, 'study_register.html', {'form': form})
@@ -72,7 +72,7 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request,user)
             messages.success(request,'Password was updated!')
-            return redirect('mypage_edit')
+            return HttpResponse("<script> window.close();</script>");
         else:
             messages.error(request,'Please correct the error')
     else:
@@ -90,7 +90,8 @@ def change_nickname(request):
 
             messages.info(request,"회원정보가 변경되었습니다!")
 
-            return redirect('mypage_edit')
+            return HttpResponse("<script> window.close();</script>");
+
     else:
         user_change_form = CustomUserChangeForm(instance=request.user)
         return render(request,'change_nickname.html',{
@@ -104,7 +105,7 @@ def change_image(request):
         profile_form = ProfileForm(request.POST,request.FILES,instance=request.user)
         if profile_form.is_valid():
             profile_form.save()
-            return redirect('mypage_edit')
+            return HttpResponse("<script> window.close();</script>");
     else:
         profile_form = ProfileForm(instance=request.user)
         return render(request,'change_image.html',{
@@ -117,5 +118,4 @@ def my_study_list(request):
     paginator = Paginator(recruit,3)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
-    print(recruit)
     return render(request,'study_list.html', {'recruit':recruit,'posts':posts})
