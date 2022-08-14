@@ -22,8 +22,9 @@
     border:1px solid #51a998;
     color:black;
     overflow:auto;
-    height:10%;
+    height:auto;
     font-size:1.2vw;
+    overflow:auto;
 }
 
 .user_image{
@@ -39,7 +40,7 @@
     font-size:1.2vw;
     border:1px solid #51a998;
     justify-content:center;
-    overflow:scroll;
+
 }
 .main_content{
     width:45%;
@@ -132,6 +133,7 @@
     margin-left:1vw;
     font-weight:600;
     display:flex;
+    flex-wrap:wrap;
     width:80%;
     color:#51a998;
     font-size:1.05vw;

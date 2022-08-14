@@ -48,45 +48,5 @@ else{
 }
 }
 
-function change_page(){
-    let href = document.location.href;
-    let valid_index;
-    is_first_page = false;
-    let new_url = '';
-
-    for(let i = 0;i<href.length;i++){
-
-        if(href[i] == '/'){
-            valid_index = i;
-            new_url = '';
-        }
-        else{
-            new_url += href[i];
-        }
-    }
-
-    let temp_new = init_href + new_url;
-    let next_ = parseInt(temp_new[temp_new.length-1]);
-    let list_ = next_;
-
-    next_++;
-    next_ += '';
-    console.log(list_);
-    console.log(next_);
-    temp_new.replace(list_,next_);
-
-    if(valid_index == href.length-1 || new_url == ''){
-        is_first_page = true;
-    }
-    if(is_first_page == true || temp_new[temp_new.length-1] == '/'){ //첫번쨰 페이지인 경우
-
-    }
-    else{ //첫번째 페이지가 아닌경우
-
-
-    }
-}
-
-setTimeout(change_page(),1000);
 
 

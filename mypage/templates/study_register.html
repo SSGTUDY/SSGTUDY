@@ -1,15 +1,11 @@
-
 {% load static %}
 <html lang="en">
 <head>
-    {% block css %}
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>스터디 등록</title>
     <link rel = "stylesheet" href = "{% static 'css/mypage_main.css' %}">
     <link rel = "stylesheet" href = "{% static 'css/mypage_register.css' %}">
-    <link rel="stylesheet" media="(max-width: 480px)" href="{% static 'css/mobile.css' %}">
-    <script src = "{% static 'js/mypage.js' %}"></script>
+
     <style>
 
         .main_filed{
@@ -26,7 +22,7 @@
             align-items:center;
         }
     </style>
-    {% endblock css %}
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -50,7 +46,7 @@
         {% endfor %}
 
     <div>
-        <input type="submit" value="작성완료" class = "imgadd">
+        <input type="submit" value="작성완료" class = "imgadd" onclick = "close">
     </div>
     </form>
 

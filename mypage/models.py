@@ -16,7 +16,7 @@ class Recruit(models.Model):
         ('end', '모집완료'),
     )
     recruit_status = models.CharField(max_length=20, choices=recruit_status_CHOICES, default='ongoing')
-    recruit_title = models.CharField(max_length=100)
+    recruit_title = models.CharField(max_length=30)
     recruit_period_start = models.DateField()
     recruit_period_end = models.DateField()
     recruit_number = models.IntegerField()
