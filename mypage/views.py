@@ -7,7 +7,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.hashers import check_password
 from home.models import User
 from django.contrib.auth.forms import UserChangeForm
+
 from .forms import CustomUserChangeForm,ProfileForm
+
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -17,6 +19,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import RecruitForm
 from .models import Bookmark, Recruit
 from django.utils import timezone
+
 
 
 # mypage_main.html
@@ -94,8 +97,11 @@ def change_nickname(request):
         user_change_form = CustomUserChangeForm(request.POST,instance=request.user)
         if user_change_form.is_valid():
             user_change_form.save()
+
             messages.info(request,"회원정보가 변경되었습니다!")
+
             return HttpResponse("<script> window.close();</script>");
+
     else:
         user_change_form = CustomUserChangeForm(instance=request.user)
         return render(request,'change_nickname.html',{
