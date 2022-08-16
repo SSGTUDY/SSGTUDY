@@ -1,6 +1,4 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import RecruitForm
-from .models import Recruit
 from django.utils import timezone
 from django.contrib import auth
 from django.contrib.auth import update_session_auth_hash
@@ -17,13 +15,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from .forms import RecruitForm
+from .models import Bookmark, Recruit
+from django.utils import timezone
 
 
 
 # mypage_main.html
 def mypage_main(request):
     return render(request, 'mypage_main.html')
-
 # study_register.html
 def study_register(request, recruit = None):
     if request.method == "POST":
@@ -38,14 +39,23 @@ def study_register(request, recruit = None):
         form = RecruitForm(instance = recruit)
         return render(request, 'study_register.html', {'form': form})
 
+
 # study_list.html
+@login_required
 def study_list(request):
-    return render(request, 'study_list.html')
+    recruits = Recruit.objects
+    return render(request, 'study_list.html', {'recruits': recruits})
 
 # study_bookmark.html
+@login_required
 def study_bookmark(request):
-    return render(request, 'study_bookmark.html')
+    bookmarks = Bookmark.objects.filter(bookmark_user = request.user)
+    paginator = Paginator(bookmarks, 3)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'study_bookmark.html', {'bookmarks': bookmarks, 'posts': posts})
 
+    
 # study_schedule.html
 def study_schedule(request):
     return render(request, 'study_schedule.html')
@@ -119,3 +129,4 @@ def my_study_list(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request,'study_list.html', {'recruit':recruit,'posts':posts})
+

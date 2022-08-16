@@ -49,10 +49,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_summernote',
-    'about.apps.AboutConfig',
+
     'home.apps.HomeConfig',
     'match.apps.MatchConfig',
     'mypage.apps.MypageConfig',
+    'about.apps.AboutConfig',
 ]
 
 # 커스텀 유저를 사용하는데 home앱의 CustomUser 모델을 사용하겠다.

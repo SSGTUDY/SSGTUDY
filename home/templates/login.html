@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 {% extends 'base.html' %}
 {% load static %}
 
@@ -20,7 +20,6 @@
 
 <div class="container box user-box">
     <body class="text-center">
-    
         <div class="form-signin">
           <form>
             <img class="mb-4" src="{% static 'home/img/icon.png' %}" alt="" width="60" height="60">
@@ -44,13 +43,24 @@
             
             <p class="mt-4 mb-3 text-muted">아직 계정이 없다면? <a style="color:#56b198;" href="{% url 'signup' %}"> 회원가입</a></p>
           </form>
+
+          <!-- 백엔드 -->
+          <div class="container">
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn1" value="LOG IN">
+            </form>
+          </div>
+      <!-- 끝 -->
         </div>
        
         
         </body>
+
 </div>
-{% endblock %}
-=======
+
+
 <h1>로그인</h1>
 
 <!-- 로그인 form -->
@@ -59,4 +69,6 @@
         {{ form.as_p }}
     <input type="submit" class="btn1" value="LOG IN">
 </form>
->>>>>>> 96856aa4184fe3e0f9a5d755f8391e659239bff6
+
+{% endblock %}
+

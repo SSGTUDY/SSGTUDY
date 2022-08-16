@@ -27,6 +27,7 @@
         {% endif %}
         <!-- 게시글 세부 정보가 들어갈 영역 -->
         {% for temp in posts %}
+
         <div class = "board_detail">
             <!--어떤 종류의 게시글인지 보여줌 -->
             <div class = "top_board_detail">
@@ -42,7 +43,6 @@
             <div style = "width:100%;height:35%;overflow:auto;border-bottom:1px solid #d1d1d1;margin:0px auto;">
                 <a href="{% url 'study_detail' temp.id %}" style="text-decoration:none;color:black;font-size:1vw;font-weight:700">{{ temp.recruit_title }}</a>
             </div>
-
             <div style= "width:100%;height:45%;overflow:auto;">
                 {{ temp.recruit_content | safe}}
             </div>
@@ -68,10 +68,10 @@
     <div class = "board_area" style="width:60%;">
         {% if Posts.has_previous %}
         <div class= "tag_detail">
-        <a href = "?page2={{Posts.previous_page_number}}" class = "page_nation" style="text-decoration:none;align-items:flex-start;">
-            <div class = "circle">
-                <div class = "inner_circle_bottom">⇦</div>
-            </div></a>
+            <a href = "?page2={{Posts.previous_page_number}}" class = "page_nation" style="text-decoration:none;align-items:flex-start;">
+                <div class = "circle">
+                    <div class = "inner_circle_bottom">⇦</div>
+                </div></a>
         </div>
         {% endif %}
 
@@ -82,19 +82,63 @@
         {% endfor %}
         {% if Posts.has_next %}
         <div class = "tag_detail">
-        <a href = "?page2={{Posts.next_page_number}}" class = "page_nation" style="text-decoration:none;align-items:flex-start;">
-            <div class = "circle">
-                <div class = "inner_circle_bottom">⇨</div>
-            </div>
-        </a>
+            <a href = "?page2={{Posts.next_page_number}}" class = "page_nation" style="text-decoration:none;align-items:flex-start;">
+                <div class = "circle">
+                    <div class = "inner_circle_bottom">⇨</div>
+                </div>
+            </a>
         </div>
         {% endif %}
     </div>
 </div>
 
+
+
+    <br><br>
+    카테고리별
+    <br>
+
+    스터디
+    {% for recruit_field_study in recruit_field_study.all %}
+        <a href="{% url 'study_detail' recruit_field_study.id %}">{{ recruit_field_study.recruit_title }}</a>
+        <br>
+    {% endfor %}
+    <br>
+
+    소모임
+    {% for recruit_field_club in recruit_field_club.all %}
+        <a href="{% url 'study_detail' recruit_field_club.id %}">{{ recruit_field_club.recruit_title }}</a>
+        {{ recruit_field_club.hashtag}}
+        <br>
+    {% endfor %}
+    <br>
+
+    프로젝트
+    {% for recruit_field_project in recruit_field_project.all %}
+        <a href="{% url 'study_detail' recruit_field_project.id %}">{{ recruit_field_project.recruit_title }}</a>
+        {{ recruit_field_project.hashtag}}
+        <br>
+    {% endfor %}
+    <br>
+
+    설문조사
+    {% for recruit_field_survey in recruit_field_survey.all %}
+        <a href="{% url 'study_detail' recruit_field_survey.id %}">{{ recruit_field_survey.recruit_title }}</a>
+        {{ recruit_field_survey.hashtag}}
+        <br>
+    {% endfor %}
+    <br>
+
+
+       <form class="sea" action="" method="GET">
+        <input type="text" name="q" value="{{ q }}">
+        <input type="submit" value="검색">
+    </form>
+
+
+
+
 <script src = "{% static 'js/match_main.js' %}"></script>
 {% endblock %}
-
 </body>
 </html>
-

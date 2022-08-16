@@ -72,19 +72,36 @@
             <div>{{ recruit.recruit_meeting }}</div>
 
         </div>
+        <div>
+        {% if recruit.recruit_writer != user %}
+        <form method = "POST" action="{% url 'bookmark' recruit.id %}">
+            {% csrf_token %}
+            {{ bookmark_form.as_p }}
+            <input type="submit" value="북마크" class ="hash_add" onclick = "alert('북마크 되었습니다');">
 
+        </form>
+        {% for bookmark in recruit.bookmarks.all %}
+        {% if bookmark.bookmark_user == user %}
+
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-around">
+        {% for hashtag in recruit.recruit_hashtag.all %}
+        {{ hashtag.hashtag_content }}
+        {% endfor %}
+        </div>
         <div> <!-- 해시태그를 작성하는 Form -->
             {% if recruit.recruit_writer == user %}
-
             <form method = "POST" action="{% url 'hashtag_write' recruit.id %}" style="color:black;">
                 {% csrf_token %}
                 {{ hashtag_form.as_p }}
                 <input type="submit" value = "추가" class = "hash_add">
             </form>
+
             {% endif %}
-            {% for hashtag in recruit.hashtags.all %}
-            {{ hashtag.hashtag_content }}
-            {% endfor %}
+
         </div>
     </div>
 
@@ -149,8 +166,10 @@
     </form>
 </div>
 
+
 <script src = "{% static 'js/match_detail.js' %}"></script>
 {% endblock %}
 
 </body>
 </html>
+

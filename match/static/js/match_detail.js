@@ -43,6 +43,11 @@ else{
 }
 
 
+function click_event(){
+    alert('북마크 되었습니다!');
+}
+
+
 
 
 

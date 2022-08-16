@@ -49,8 +49,11 @@
     </div>
     <div class = "content" style = "border:1px solid #d1d1d1;border-radius:1%;">
         {% for temp in posts %}
-        <div class = "detail_div" style="border:1px solid #d1d1d1;width:60%;height:15vh;display:flex;flex-direction:column">
-            <div style="color:#51a998;font-size:1.2vw;">{{ temp.recruit_title }}</div>
+
+        <div class = "detail_div" style="border:1px solid #d1d1d1;width:60%;height:auto;display:flex;flex-direction:column">
+
+                <a href = "{% url 'study_detail' temp.id %}" class = "hober" style="text-decoration:none;color:#51a998;font-size:1.2vw;">{{ temp.recruit_title }}</a>
+
             <br>
             <div>{{ temp.recruit_date}}</div>
         </div>
@@ -76,7 +79,8 @@
         </div>
     </div>
 </div>
-</div>
+
+
 {% endblock %}
 </body>
 </html>
