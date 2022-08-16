@@ -1,5 +1,5 @@
 from django import forms
-from .models import Hashtag, Recruit
+from .models import Hashtag, Recruit, Bookmark
 from django_summernote.widgets import SummernoteWidget
 from home.forms import UserForm
 from django.contrib.auth import get_user_model
@@ -37,8 +37,9 @@ class HashtagForm(forms.ModelForm):
         fields = ['hashtag_content']
 
         labels = {
-            'hashtag_content': '해시태그'
+            'hashtag_content': '해시태그',
         }
+
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -51,4 +52,9 @@ class ProfileForm(forms.ModelForm):
         model = User
         fields = ['profile_image']
 
+
+class BookmarkForm(forms.ModelForm):
+    class Meta:
+        model = Bookmark
+        exclude = ('bookmark_id', 'bookmark_user')
 

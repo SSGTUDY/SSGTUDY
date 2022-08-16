@@ -33,10 +33,12 @@ def signup(request):
             user.set_password(form.cleaned_data['password'])
             user.save()
             return render(request, 'signup_end.html', {'user':user})
-    
-    elif request.method == 'GET':
+
+    else:
+
         form = UserForm()
-    return render(request, 'signup.html', {'form': form})
+        return render(request, 'signup.html', {'form': form})
+
 
 # signup_end.html
 def signup_end(request):
