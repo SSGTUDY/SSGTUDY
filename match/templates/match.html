@@ -10,32 +10,114 @@
         <link rel="stylesheet" type="text/css" href="{% static 'match/css/match_main.css' %}" />
     </hd>
 
-    <div class="categorybox">
-        <h4 class="bycategory">카테고리별</h4>
-        <input class="findcate" type="text" v-model="word"/>
-                <button class="srchbutton" type="button" v-on:click="search">SEARCH</button>
-        <div class="cate">
-            <nav class="navbar navbar-expand-lg bg-light">
-                <div class="container-fluid">
-                  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                      <a class="nav-link active" aria-current="page" href="#">전체</a>
-                      <a class="nav-link" href="#">소모임</a>
-                      <a class="nav-link" href="#">스터디</a>
-                      <a class="nav-link" href="#">프로젝트</a>
-                      <a class="nav-link" href="#">설문조사</a>
-                    </div>
-                  </div>
-                </div>
-              </nav>
-              <table class="catepost">
-                <tr class="line"><td class="line"></td></tr>
-                <tr class="line"><td class="line"></td></tr>
-                <tr class="line"><td class="line"></td></tr>
-                <tr class="line"><td class="line"></td></tr>
-            </table>
+    <!--카테고리-->
+    <div class="middlebox">
+        <h4 class="titleword">카테고리별</h4>
+        <input class="searchtext" type="text" v-model="word"/>
+        <button class="srchbutton" type="button" v-on:click="search">SEARCH</button>
+          <div class="category">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link" href="#">전체</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">소모임</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">스터디</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">프로젝트</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">설문조사</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">번개</a>
+              </li>
+            </ul>
+            <ul class="nav justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link" href="#">인기순</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">최신순</a>
+              </li>
+            </ul>
+            <!--키테고리게시글-->
+            <div class="catepost"></div>
+            <div class="catepost"></div>
+            <div class="catepost"></div>
+            <div class="catepost"></div>
+            <div class="catepost"></div>
+            <div class="catepost"></div>
+          </div>
+          <div class="float_sidebar">
+            <div class="content">
+                <section class="latelyselected">
+                  <p>최근 본 게시물</p>
+                </section>
+                <div class="latelywatchedpost"></div>
+                <div class="latelywatchedpost"></div>
             </div>
-        </div>
+            <a href="#" class="ssgupbutton"><img src="{% static 'match/img/circlessg.png' %}" alt="mdo" width="35" height="35"></a>
+          </div>
     </div>
+
+    <!--태그별 포스트-->
+    <div class="bottombox">
+      <div class="tagbox">
+        <h4 class="titleword">태그별</h4>
+          <div class="slide-wrapper">
+            <img id="slideLeft" class="arrow" src="{% static 'match/img/arrow_left.png' %}" alt ="mdo" width="40" height="40">
+                <div class="slider">
+                    <button class="button">#어학</button>
+                    <button class="button">#운동</button>
+                    <button class="button">#밴드</button>
+                    <button class="button">#주 1회</button>
+                    <button class="button">#자격증</button>
+                    <button class="button">#프로그래밍</button>
+                </div>
+              <img id="slideRight" class="arrow" src="{% static 'match/img/arrow_right.png' %}" alt ="mdo" width="40" height="40">
+          </div>
+          <div class="tagpostlist">
+            <table>
+              <tr>
+                <td><div class="tagpost"></div></td>
+                <td><div class="tagpost"></div></td>
+              </tr>
+              <tr>
+                <td><div class="tagpost"></div></td>
+                <td><div class="tagpost"></div></td>
+              </tr>
+            </table>
+          </div>
+      </div>
+    </div>
+
 </div>
+
+<script>
+  let buttonRight = document.getElementById('slideRight');
+  let buttonLeft = document.getElementById('slideLeft');
+  
+  buttonLeft.addEventListener('click', function(){
+    document.getElementById('slider').scrollLeft -= 180
+  });
+
+  buttonRight.addEventListener('click', function(){
+    document.getElementById('slider').scrollLeft += 180
+
+  });
+
+  $('.slider').slick({
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  dots: true,
+  centerMode: true,
+  focusOnSelect: true
+});
+
+</script>
+
 {% endblock %}
