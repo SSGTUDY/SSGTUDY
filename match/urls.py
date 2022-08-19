@@ -15,5 +15,6 @@ urlpatterns = [
     path('comment_edit/<str:id>/<str:comment_id>/', views.comment_edit, name='comment_edit'),
     path('comment_delete/<str:id>/<str:comment_id>/', views.comment_delete, name='comment_delete'),
     path('recomment_write/<str:id>/<str:comment_id>/', views.recomment_write, name='recomment_write'),
-
+    path('study_like/<int:recruit_id>/', views.likes, name='likes'),
+    path('sort_by_like',views.sort_by_like,name = 'sort_by_like'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

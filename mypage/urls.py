@@ -5,7 +5,6 @@ from django.conf.urls.static import static
 from match import views as match_views
 
 
-
 urlpatterns = [
     # mypage_main.js
     path('', views.mypage_main, name='mypage_main'),

@@ -18,9 +18,6 @@ def hashtag_detail(request, pk):
     recruit_field_club = Recruit.objects.filter(recruit_field = "club")
     recruit_field_project = Recruit.objects.filter(recruit_field = "project")
     recruit_field_survey = Recruit.objects.filter(recruit_field = "survey")
-    hashtag = Hashtag.objects
-    hashtags = get_object_or_404(Recruit, pk = pk)
-    hashtag_recruits = hashtags.recruit_set
     q = request.GET.get('q', '')
     if q:
         recruit_field_study = recruit_field_study.filter(Q(recruit_title__icontains = q) | Q(recruit_content__icontains = q))
@@ -188,7 +185,8 @@ def find_date_end(request):
    recruits = Recruit.objects.filter(recruit_period_end__lte = enddate, recruit_status = 'ongoing').order_by('recruit_period_end')
    paginator = Paginator(recruits,5)
    page = request.GET.get('page1')
-   recruit_all = Recruit.objects.all()
+   recruit_all = Recruit.objects.filter(recruit_period_end__lte = enddate, recruit_status = 'ongoing').order_by('recruit_period_end')
+
    try:
        recruits = paginator.page(page)
    except PageNotAnInteger:
@@ -197,12 +195,10 @@ def find_date_end(request):
        recruits = paginator.page(paginator.num_pages)
    # hashtag = Hashtag.objects.all()
    hashtag = Hashtag.objects.all()
-   for i in recruit_all.all():
-       print(i.recruit_hashtag)
-   recruit_field_study = Recruit.objects.filter(recruit_field="study")
-   recruit_field_club = Recruit.objects.filter(recruit_field="club")
-   recruit_field_project = Recruit.objects.filter(recruit_field="project")
-   recruit_field_survey = Recruit.objects.filter(recruit_field="survey")
+   recruit_field_study = Recruit.objects.filter(recruit_field="study",recruit_status = 'ongoing').order_by('recruit_period_end')
+   recruit_field_club = Recruit.objects.filter(recruit_field="club",recruit_status = 'ongoing').order_by('recruit_period_end')
+   recruit_field_project = Recruit.objects.filter(recruit_field="project",recruit_status = 'ongoing').order_by('recruit_period_end')
+   recruit_field_survey = Recruit.objects.filter(recruit_field="survey",recruit_status = 'ongoing').order_by('recruit_period_end')
 
    q = request.GET.get('q', '')
    if q:
@@ -210,9 +206,49 @@ def find_date_end(request):
    return render(request, 'match.html', {'posts':recruits,'Posts':hashtag,'recruit_field_study': recruit_field_study, 'recruit_field_club': recruit_field_club, 'recruit_field_project': recruit_field_project, 'recruit_field_survey': recruit_field_survey,
     'q': q,'recruit_all':recruit_all})
 
+@login_required
+def likes(request, recruit_id):
+    recruit = get_object_or_404(Recruit, id = recruit_id)
+    if request.user in recruit.like.all():
+        recruit.like.remove(request.user)
+        recruit.like_count -= 1
+        recruit.save()
+    else:
+        recruit.like.add(request.user.id)
+        recruit.like_count += 1
+        recruit.save()
+
+    return redirect('/match/study_detail/' + str(recruit_id))
 
 
+def sort_by_like(request):
+    startdate = date.today()
+    enddate = startdate + timedelta(days=200)
+    recruits = Recruit.objects.filter(recruit_period_end__lte = enddate, recruit_status = 'ongoing').order_by('-like_count')
+    paginator = Paginator(recruits, 5)
+    page = request.GET.get('page1')
+    recruit_all = Recruit.objects.filter(recruit_period_end__lte=enddate, recruit_status='ongoing').order_by('-like_count')
+    try:
+        recruits = paginator.page(page)
+    except PageNotAnInteger:
+        recruits = paginator.page(1)
+    except EmptyPage:
+        recruits = paginator.page(paginator.num_pages)
+    # hashtag = Hashtag.objects.all()
 
+    recruit_field_study = Recruit.objects.filter(recruit_field="study", recruit_status='ongoing').order_by('-like_count')
+    recruit_field_club = Recruit.objects.filter(recruit_field="club", recruit_status='ongoing').order_by('-like_count')
+    recruit_field_project = Recruit.objects.filter(recruit_field="project", recruit_status='ongoing').order_by('-like_count')
+    recruit_field_survey = Recruit.objects.filter(recruit_field="survey", recruit_status='ongoing').order_by('-like_count')
+
+    q = request.GET.get('q', '')
+    if q:
+        recruit_all = recruit_all.filter(Q(recruit_title__icontains=q) | Q(recruit_content__icontains=q))
+    return render(request, 'match.html',
+                  {'posts': recruits, 'Posts': hashtag, 'recruit_field_study': recruit_field_study,
+                   'recruit_field_club': recruit_field_club, 'recruit_field_project': recruit_field_project,
+                   'recruit_field_survey': recruit_field_survey,
+                   'q': q, 'recruit_all': recruit_all})
 
 
 

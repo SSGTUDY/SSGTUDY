@@ -39,7 +39,7 @@
                     {{ temp.recruit_field }}
                 </div>
                 <div style="font-size:1.1vw;color:#3165B1" class = "top_content_date">
-                    <section style="font-size:1vw;display:inline;">D-</section>
+
                     <label class = "today" style="font-size:1vw;">{{ temp.recruit_period_end }}</label> <!-- 모집 날짜 (마감) -->
                 </div>
             </div>
@@ -51,9 +51,7 @@
                 {{ temp.recruit_content | safe}}
             </div>
         </div>
-
         {% endfor %}
-
         {% if posts.has_next %}
         <a href = "?page1={{posts.next_page_number}}" class = "page_nation" style="text-decoration:none;">
             <div class = "circle">
@@ -93,71 +91,122 @@
             <li class="nav-item">
                 <a class="nav-link" style="color:#3f3f3f;font-weight:700" href="#" onclick = "recruit_survey()">설문조사</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:#3f3f3f;font-weight:700" href="#">번개</a>
-            </li>
+
         </ul>
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <a class="nav-link" href="#">인기순</a>
+                <a class="nav-link" href = "{% url 'sort_by_like' %}">인기순</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">최신순</a>
+                <a class="nav-link" href = "{% url 'match' %}">최신순</a>
             </li>
         </ul>
         <!--키테고리게시글-->
         {% for recruit_all in recruit_all.all %}
         <div id="catepost" class = "recruit_all">
+            <div class = "inner_recruit">
+                <div>
+                    <a href="{% url 'study_detail' recruit_all.id %}" class = "recruit_a">
+                        {{ recruit_all.recruit_title }}</a>
+                </div>
+                <br>
+                <div class = "today">
+                    {{ recruit_all.recruit_period_end }}
 
-            <div>
-                <a href="{% url 'study_detail' recruit_all.id %}" style="color:black;font-weight:600;font-size:1.3rem;">
-                    {{ recruit_all.recruit_title }}</a>
-
+                </div>
+                <br>
+                <div style="color:red;margin-bottom:1vh;font-size:2rem;">
+                ❤{{ recruit_all.like_count }}
+                </div>
             </div>
         </div>
         {% endfor %}
 
         {% for recruit_field_study in recruit_field_study.all %}
         <div id = "catepost" class = "recruit_study">
-            <div></div>
-            <a href = "{% url 'study_detail' recruit_field_study.id %}" style="color:black;font-weight:600;font-size:1.3rem;">
-                {{ recruit_field_study.recruit_title }}</a>
+            <div class = "inner_recruit">
+                <div>
+                    <a href = "{% url 'study_detail' recruit_field_study.id %}" class = "recruit_a">
+                        {{ recruit_field_study.recruit_title }}</a>
+                </div>
+                <div class = "today">
+                    {{ recruit_field_study.recruit_period_end }}
+
+                </div>
+                <br>
+                <div style="color:red;margin-bottom:1vh;font-size:2rem;">
+                   ❤{{ recruit_field_study.like_count }}
+                </div>
+
+
+            </div>
 
         </div>
-    </div>
         {% endfor %}
 
         {% for recruit_field_club in recruit_field_club.all %}
         <div id = "catepost" class = "recruit_club">
-            <div>
-            <a href = "{% url 'study_detail' recruit_field_club.id %}" style="color:black;font-weight:600;font-size:1.3rem;">
-                {{ recruit_field_club.recruit_title }}</a>
+            <div class = "inner_recruit">
+                <div>
+                    <a href = "{% url 'study_detail' recruit_field_club.id %}" class = "recruit_a">
+                        {{ recruit_field_club.recruit_title }}</a>
+                </div>
+                <br>
+                <div class = "today">
+                    {{ recruit_field_club.recruit_period_end }}
 
                 </div>
+                <br>
+                <div style="color:red;margin-bottom:1vh;font-size:2rem;">
+                   ❤{{ recruit_field_club.like_count }}
+                </div>
+            </div>
         </div>
         {% endfor %}
 
         {% for recruit_field_project in recruit_field_project.all %}
         <div id = "catepost" class = "recruit_project">
-            <div>
-            <a href = "{% url 'study_detail ' recruit_field_project.id %}" style="color:black;font-weight:600;font-size:1.3rem;">
-                {{ recruit_field_project.recruit_title }}</a>
+
+            <div class = "inner_recruit">
+                <div>
+                    <a href = "{% url 'study_detail ' recruit_field_project.id %}" class = "recruit_a">
+                        {{ recruit_field_project.recruit_title }}
+                    </a>
+                </div>
+                <br>
+                <div class = "today">
+                   {{ recruit_field_project.recruit_period_end }}
+
+                </div>
+                <br>
+                <div style="color:red;margin-bottom:1vh;font-size:2rem;">
+                   ❤{{ recruit_field_project.like_count }}
+                </div>
             </div>
+
         </div>
         {% endfor %}
 
-    {% for recruit_field_survey in recruit_field_survey.all %}
-    <div id = "catepost" class = "recruit_survey">
-        <div>
-            <a href = "{% url 'study_detail' recruit_field_survey.id %">
-                {{ recruit_field_survey.recruit_title }}
-                {% for hashtag in recruit_field_survey.recruit_hashtag %}
-                {{ hashtag }}
-                {% endfor %}
-            </a>
+        {% for recruit_field_survey in recruit_field_survey.all %}
+        <div id = "catepost" class = "recruit_survey">
+            <div class = "inner_recruit">
+                <div>
+                    <a href = "{% url 'study_detail' recruit_field_survey.id %" class = "recruit_a">
+                        {{ recruit_field_survey.recruit_title }}
+                    </a>
+                </div>
+                <br>
+                <div class = "today">
+                   {{ recruit_field_survey.recruit_period_end }}
 
+                </div>
+                <br>
+                <div style="color:red;margin-bottom:1vh;font-size:2rem;">
+                    ❤{{ recruit_field_survey.like_count }}
+                </div>
+
+            </div>
         </div>
-    </div>
         {% endfor %}
 
         {% for q in q.all %}
@@ -169,22 +218,18 @@
         {% endfor %}
 
     </div>
-    <div class="float_sidebar">
-        <div class="content">
-            <section class="latelyselected">
-                <p>최근 본 게시물</p>
-            </section>
-            <div class="latelywatchedpost"></div>
-            <div class="latelywatchedpost"></div>
-        </div>
-        <a href="#" class="ssgupbutton"><img src="{% static 'match/img/circlessg.png' %}" alt="mdo" width="35" height="35"></a>
-    </div>
+
 </div>
+
+
+
 
 <div class = "tag_area">
     <div class = "text_area">
         <text style="font-size:2vw;"># 태그 별</text>
     </div>
+
+
 
     <div id = "myCarousel" class = "carousel slide slider" date-ride = "carousel">
         <ol class = "carousel-indicators" style="background-color:green;visibility: hidden;">
@@ -195,11 +240,13 @@
         </ol>
 
         <div class = "carousel-inner" style="width:100%;height:30%;background:#f5f5f5;">
-            {% for Temp in Posts %}
+            {% for Temp in Posts.all %}
             <div class="item{% if forloop.first %} active{% endif %}">
-                <a style="cursor:pointer;color:black;text-decoration:none;" href = "{% url 'hashtag_detail' Temp.id %}"><h3 style = "color:black;text-decoration:none;">{{ Temp.hashtag_content }}</h3></a>
+                <a style="cursor:pointer;color:black;text-decoration:none;" href = "{% url 'hashtag_detail' Temp.id%}">
+                    <h3 style = "color:black;text-decoration:none;">{{ Temp.hashtag_content }}</h3></a>
             </div>
             {% endfor %}
+
         </div>
         <a class="carousel-control-prev" href="#myCarousel" data-slide="prev" style="background:#51a998;border-radius:50%;margin-left:12%;width:3.5rem;height:3.5rem;
         ">

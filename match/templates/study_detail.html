@@ -102,6 +102,25 @@
             {% endif %}
 
         </div>
+
+         ❤️
+        {{ recruit.like_count }}
+
+        <a href="{% url 'likes' recruit.id %}" style="color:black;text-decoration:none;" id = "likes">
+            {% if user in recruit.like.all %}
+            <p style="color:#51a998;">
+              취소
+            </p>
+            {% else %}
+            <p style="font-size:1rem;">
+            ❤️좋아요
+            </p>
+            {% endif %}
+        </a>
+
+
+
+
     </div>
 
     <!-- 만약 작성자가 현재 user와 동일하다면 수정, 삭제를 띄우기 -->

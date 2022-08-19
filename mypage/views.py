@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import RecruitForm
 from .models import Bookmark, Recruit
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 from django.http import Http404
 from django.db.models import Q
 
