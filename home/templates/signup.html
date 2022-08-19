@@ -4,8 +4,9 @@
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'home/css/base.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'home/css/user.css' %}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원가입</title>
 {% endblock css %}
-
 
 {% block content %}
 <head>
@@ -15,10 +16,9 @@
         }
     </style>
 </head>
-
 <body>
-
     <!-- 백엔드 -->
+    <!--
     <div class="box container">
         <h1>signup test</h1>
         <form method = "POST" enctype="multipart/form-data">
@@ -26,10 +26,19 @@
             {{ form.as_p }}
             <input class = "btn btn-primary" type = "submit" value = "submit">
         </form>
-    </div>
+    </div> -->
     <!-- 끝 -->
 
     <div class="container box">
+        <form method = "POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            {{ form.email }}
+            {{ form.username }}
+
+            {{ form.phone_number }}
+            {{ form.profile_image }}
+            {{ form.password }}
+            {{ form.address }}
             <div class="input-form col-md-12 mx-auto">
                 <h4 class="mb-3">회원가입</h4>
                 <form class="validation-form" novalidate>
@@ -45,7 +54,7 @@
                             <label for="nickname">별명</label>
                             <input type="text" class="form-control" id="nickname" placeholder="Nickname" value="" required>
                             <div class="invalid-feedback">
-                                별명을 입력해주세요.
+                                {{ form.nickname }}
                             </div>
                         </div>
                     </div>
@@ -104,6 +113,8 @@
                 </form>
 
             </div>
+
+        </form>
     </div>
     <script>
         window.addEventListener('load', () => {

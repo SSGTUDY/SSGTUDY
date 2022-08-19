@@ -15,4 +15,5 @@ urlpatterns = [
     path('comment_edit/<str:id>/<str:comment_id>/', views.comment_edit, name='comment_edit'),
     path('comment_delete/<str:id>/<str:comment_id>/', views.comment_delete, name='comment_delete'),
     path('recomment_write/<str:id>/<str:comment_id>/', views.recomment_write, name='recomment_write'),
+
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
