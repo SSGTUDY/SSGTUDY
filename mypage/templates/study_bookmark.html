@@ -51,10 +51,10 @@
         {% for temp in posts %}
 
         <div class = "detail_div" style="border:1px solid #d1d1d1;width:60%;height:auto;display:flex;flex-direction:column">
-                <a href = "{% url 'study_detail' temp.id %}" style="text-decoration:none;color:#51a998;font-size:1.2vw;" class = "hober">
+                <a href = "{% url 'study_detail' temp.bookmark_id.id %}" style="text-decoration:none;color:#51a998;font-size:1.2vw;" class = "hober">
                     {{ temp.bookmark_id.recruit_title }}</a>
             <br>
-            <div>{{  temp.bookmark_id.recruit_content | safe }}</div>
+            <div>{{  temp.bookmark_id.recruit_date }}</div>
         </div>
             {% endfor %}
 

@@ -17,7 +17,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import RecruitForm
 from .models import Bookmark, Recruit
 from django.utils import timezone
-
+from django.http import Http404
+from django.db.models import Q
 
 # mypage_main.html
 def mypage_main(request):
@@ -52,7 +53,6 @@ def study_bookmark(request):
     posts = paginator.get_page(page)
     return render(request, 'study_bookmark.html', {'bookmarks': bookmarks, 'posts': posts})
 
-    
 # study_schedule.html
 def study_schedule(request):
     return render(request, 'study_schedule.html')

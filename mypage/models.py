@@ -1,5 +1,6 @@
 from django.db import models
 from home.models import User
+
 class Recruit(models.Model):
     recruit_writer = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'recruits', null=True)
     recruit_date = models.DateTimeField(auto_now_add=True, blank=True)
@@ -28,7 +29,13 @@ class Recruit(models.Model):
     recruit_content = models.TextField()
     recruit_image = models.ImageField(upload_to='images/', null=True, blank = True)
     recruit_hashtag = models.ManyToManyField('Hashtag', blank=True)
+    # 좋아요 구현
+    like = models.ManyToManyField(User, related_name='likes', blank=True)
+    like_count = models.PositiveIntegerField(default=0)
+    # 북마크
 
+    # 가입하기
+    recruit_register = models.ManyToManyField('match.RecruitUser', related_name='recruit_users', blank=True)
     def __str__(self):
         return self.recruit_title
 
@@ -41,7 +48,9 @@ class Hashtag(models.Model):
         return self.hashtag_content
 
 class Bookmark(models.Model):
-    bookmark_id = models.ForeignKey(Recruit, on_delete=models.CASCADE, related_name = 'bookmarks')
+    bookmark_id = models.ForeignKey(Recruit, on_delete=models.CASCADE, related_name = 'bookmarks', null = True)
     bookmark_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name = 'bookmarks', null = True)
+    def __str__(self):
+        return self.bookmark_user.nickname
 
     #bookmark_id.recruit_title

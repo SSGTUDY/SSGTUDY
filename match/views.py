@@ -12,8 +12,6 @@ from django.http import HttpResponse
 from django.db.models import Q
 
 
-# match.html
-
 def hashtag_detail(request, pk):
     recruits = Recruit.objects
     recruit_field_study = Recruit.objects.filter(recruit_field = "study")
@@ -21,7 +19,7 @@ def hashtag_detail(request, pk):
     recruit_field_project = Recruit.objects.filter(recruit_field = "project")
     recruit_field_survey = Recruit.objects.filter(recruit_field = "survey")
     hashtag = Hashtag.objects
-    hashtags = get_object_or_404(Hashtag, pk = pk)
+    hashtags = get_object_or_404(Recruit, pk = pk)
     hashtag_recruits = hashtags.recruit_set
     q = request.GET.get('q', '')
     if q:
@@ -32,7 +30,6 @@ def hashtag_detail(request, pk):
     return render(request, 'match.html', {'recruits': recruits, 'hashtag': hashtag, 'hashtags': hashtags, 'hashtag_recruits': hashtag_recruits,
     'recruit_field_study': recruit_field_study, 'recruit_field_club': recruit_field_club, 'recruit_field_project': recruit_field_project, 'recruit_field_survey': recruit_field_survey,
     'q': q})
-
 
 # study_detail.html
 def study_detail(request, id):
@@ -182,27 +179,26 @@ def recomment_write(request, id, comment_id):
         re_form = ReCommentForm()
     return render(request, 'study_detail.html')
 
+
+
+
 def find_date_end(request):
    startdate = date.today()
-   enddate = startdate + timedelta(days = 15)
+   enddate = startdate + timedelta(days = 200)
    recruits = Recruit.objects.filter(recruit_period_end__lte = enddate, recruit_status = 'ongoing').order_by('recruit_period_end')
    paginator = Paginator(recruits,5)
    page = request.GET.get('page1')
+   recruit_all = Recruit.objects.all()
    try:
        recruits = paginator.page(page)
    except PageNotAnInteger:
        recruits = paginator.page(1)
    except EmptyPage:
        recruits = paginator.page(paginator.num_pages)
+   # hashtag = Hashtag.objects.all()
    hashtag = Hashtag.objects.all()
-   paginator = Paginator(hashtag, 7)
-   page = request.GET.get('page2')
-   try:
-       hashtag = paginator.page(page)
-   except PageNotAnInteger:
-       hashtag = paginator.page(1)
-   except EmptyPage:
-       hashtag = paginator.page(paginator.num_pages)
+   for i in recruit_all.all():
+       print(i.recruit_hashtag)
    recruit_field_study = Recruit.objects.filter(recruit_field="study")
    recruit_field_club = Recruit.objects.filter(recruit_field="club")
    recruit_field_project = Recruit.objects.filter(recruit_field="project")
@@ -210,15 +206,13 @@ def find_date_end(request):
 
    q = request.GET.get('q', '')
    if q:
-       recruit_field_study = recruit_field_study.filter(Q(recruit_title__icontains=q) | Q(recruit_content__icontains=q))
-       recruit_field_club = recruit_field_club.filter(Q(recruit_title__icontains=q) | Q(recruit_content__icontains=q))
-       recruit_field_project = recruit_field_project.filter(
-           Q(recruit_title__icontains=q) | Q(recruit_content__icontains=q))
-       recruit_field_survey = recruit_field_survey.filter(
-           Q(recruit_title__icontains=q) | Q(recruit_content__icontains=q))
-
+       recruit_all = recruit_all.filter(Q(recruit_title__icontains=q) | Q(recruit_content__icontains=q))
    return render(request, 'match.html', {'posts':recruits,'Posts':hashtag,'recruit_field_study': recruit_field_study, 'recruit_field_club': recruit_field_club, 'recruit_field_project': recruit_field_project, 'recruit_field_survey': recruit_field_survey,
-    'q': q})
+    'q': q,'recruit_all':recruit_all})
+
+
+
+
 
 
 

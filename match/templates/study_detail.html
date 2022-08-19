@@ -97,9 +97,8 @@
             <form method = "POST" action="{% url 'hashtag_write' recruit.id %}" style="color:black;">
                 {% csrf_token %}
                 {{ hashtag_form.as_p }}
-                <input type="submit" value = "추가" class = "hash_add">
+                <input type="submit" value = "추가" class = "hash_add" onclick = "alert('해시태그가 추가되었습니다');">
             </form>
-
             {% endif %}
 
         </div>
