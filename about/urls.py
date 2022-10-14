@@ -2,6 +2,7 @@ from django.urls import path
 from about import views
 from django.conf import settings
 from django.conf.urls.static import static
+from home import views as homeview
 
 urlpatterns = [
     # about
@@ -14,4 +15,5 @@ urlpatterns = [
     path('qna_detail/<str:id>/', views.about_qna_detail, name='about_qna_detail'),
     path('qna_edit/<str:id>/', views.about_qna_edit, name='about_qna_edit'),
     path('qna_delete/<str:id>/', views.about_qna_delete, name='about_qna_delete'),
+    path('login/', homeview.login, name='login'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
